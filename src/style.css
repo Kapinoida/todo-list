@@ -1,0 +1,232 @@
+::-webkit-scrollbar {
+  background-color: rgba(0,0,0,0);
+  width: .5rem;
+}
+
+::-webkit-scrollbar-track {
+  margin-block: .5rem;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(255,255,255,0.2);
+  border-radius: 100vw;
+  border: .25rem solid rgba(0,0,0,0);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-rows: 3rem 11fr;
+  grid-template-columns: 8rem 8fr;
+  max-width: 100vw;
+  height: 100vh;
+  color: white;
+}
+
+header {
+  background-color: rgba(0,0,0,0.8);
+  grid-area: 1 / 1 / 2 / 3;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.left, .right {
+  position: relative;
+  height: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 1rem;
+  padding: 0 1rem;
+}
+
+h1 {
+   font-size: 1.5rem;
+   text-align: center;
+   width: 100%;
+}
+
+aside {
+  background-color: rgba(0,0,0,0.8);
+  grid-area: 2 / 1 / 3 / 2;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 1rem;
+  gap: 1rem; 
+  font-size: 1.25rem;
+}
+
+.aside-select {
+  cursor: pointer;
+}
+
+main {
+  background-color: rgba(0,0,0,0.9);
+  grid-area: 2 / 2 / 3 / 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: auto;
+}
+
+.list {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  width: 85%;
+}
+
+.item {
+  height: 2rem;
+  width: calc(100% - 4rem);
+  margin: 0 1rem;
+  padding: 0 1rem;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: .5rem;
+}
+
+.item * {
+  position: relative;
+  width:calc(100% / 6);
+}
+
+.strike * {
+  text-decoration: line-through;
+}
+
+.trash {
+  cursor: pointer;
+  text-decoration: none !important;
+}
+
+.trash:hover {
+  color: rgba(238, 59, 59, 0.8)
+}
+
+.menu, .quick-add {
+  cursor: pointer;
+}
+
+.menu:hover, .quick-add:hover {
+  color: rgba(255,255,255,.7);
+}
+
+.add-task, .add-project {
+  justify-content: end;
+  cursor: pointer;
+}
+
+.add-project {
+  font-size: 1rem;
+}
+
+.add-task:hover, .add-project:hover {
+  color: rgba(90, 216, 107, 0.8);
+}
+
+.check {
+  display: none;
+}
+
+.check + *::before{
+  content: "";
+  display: inline-block;
+  vertical-align: bottom;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 100%;
+  border-style: solid;
+  border-width: 0.1rem;
+  border-color: gray;
+}
+
+.check:checked + *::before {
+  content: "✓";
+  color: white;
+  text-align: center;
+  background: rgba(90, 216, 107, 0.8);
+  border-color: rgba(90, 216, 107, 0.8);
+}
+
+.check:checked + * {
+  color: rgba(90, 216, 107, 0.8);;
+}
+
+.modal {
+  /* display: none; Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100vw; /* Full width */
+  height: 100vh; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0,0,0,.9);
+}
+
+
+/* Modal Content/Box */
+.modal-content {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0,0,0,.9);
+  margin: auto; /* 15% from the top and centered */
+  padding: 1rem;
+  border: 1px solid grey;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  width: 33vw;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  position: fixed;
+  right: 1rem;
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-content div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .15rem;
+}
+
+.project-submit {
+  background-color: rgba(0,0,0,.9);
+  color: white;
+  border: .1rem solid grey;
+  padding: .5rem 1.5rem;
+  cursor: pointer;
+  transition: all .05s;
+}
+
+.project-submit:active {
+  outline: .2rem solid white;
+  font-weight: bold;
+}
+
+input[type="text"] {
+  padding: .25rem;
+}
