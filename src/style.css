@@ -99,12 +99,16 @@ main {
   text-decoration: line-through;
 }
 
-.trash {
+.task-name {
+  cursor: pointer;
+}
+
+.task-delete, .project-delete {
   cursor: pointer;
   text-decoration: none !important;
 }
 
-.trash:hover {
+.task-delete:hover, .project-delete:hover {
   color: rgba(238, 59, 59, 0.8)
 }
 

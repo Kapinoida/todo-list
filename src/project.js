@@ -6,6 +6,7 @@ function renderProject(curProject) {
   const list = document.createElement('div');
   const current = projectList[curProject];
   const addTask = document.createElement('div');
+  const deleteProject = document.createElement('div');
 
   heading.classList.add('title');
   heading.innerText = current.name;
@@ -37,6 +38,8 @@ function renderProject(curProject) {
     element.appendChild(label);
 
     name.innerText = task.name;
+    name.dataset.index = index;
+    name.classList.add('task-name');
     element.appendChild(name);
 
     date.innerText = task.dueDate;
@@ -45,7 +48,7 @@ function renderProject(curProject) {
     priority.innerText = task.priority;
     element.appendChild(priority);
 
-    trash.classList.add('trash','fa-solid','fa-trash-can');
+    trash.classList.add('task-delete','fa-solid','fa-trash-can');
     trash.dataset.index = index;
     element.appendChild(trash);
 
@@ -56,8 +59,12 @@ function renderProject(curProject) {
   addTask.classList.add('item','add-task');
   list.appendChild(addTask);
 
+  deleteProject.innerHTML = 'Delete Project <i class="fa-solid fa-trash-can"></i>';
+  deleteProject.classList.add('project-delete');
+
   main.appendChild(heading);
   main.appendChild(list);
+  if(current.name !== 'Inbox') main.appendChild(deleteProject);
   body.appendChild(main);
 }
 

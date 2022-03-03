@@ -1,6 +1,6 @@
 import { body } from ".";
 
-function renderTaskModal() {
+function renderTaskEdit(curName,curDueDate,curDesc,curPriority,index) {
   const modal = document.createElement('div');
   const close = document.createElement('span');
   const form = document.createElement('form');
@@ -20,7 +20,7 @@ function renderTaskModal() {
   modal.classList.add('modal');
   form.classList.add('modal-content');
   close.classList.add('close');
-  submit.classList.add('task-submit');
+  submit.classList.add('task-edit-submit');
 
   close.innerHTML = `&times;`;
 
@@ -29,6 +29,8 @@ function renderTaskModal() {
   nameInput.setAttribute('type', 'text');
   nameInput.setAttribute('id', 'name');
   nameInput.setAttribute('name', 'name');
+  nameInput.dataset.index = index;
+  nameInput.value = curName;
   name.appendChild(nameInput);
 
   desc.setAttribute('for', 'desc');
@@ -36,6 +38,7 @@ function renderTaskModal() {
   descInput.setAttribute('type', 'text');
   descInput.setAttribute('id', 'desc');
   descInput.setAttribute('name', 'desc');
+  descInput.value = curDesc;
   desc.appendChild(descInput);
 
   dueDate.setAttribute('for', 'dueDate');
@@ -43,6 +46,7 @@ function renderTaskModal() {
   dueDateInput.setAttribute('type', 'date');
   dueDateInput.setAttribute('id', 'dueDate');
   dueDateInput.setAttribute('name', 'dueDate');
+  dueDateInput.value = curDueDate;
   dueDate.appendChild(dueDateInput);
 
   priority.setAttribute('for', 'priority');
@@ -55,6 +59,7 @@ function renderTaskModal() {
   med.innerText = 'Medium';
   high.setAttribute('value', 'High')
   high.innerText = 'High';
+  curPriority == 'Low' ? low.setAttribute('selected', 'selected') : curPriority == 'Medium' ? med.setAttribute('selected', 'selected') : curPriority == 'High' ? high.setAttribute('selected', 'selected') : '';
   priorityInput.appendChild(low);
   priorityInput.appendChild(med);
   priorityInput.appendChild(high);
@@ -72,4 +77,4 @@ function renderTaskModal() {
   body.appendChild(modal);
 }
 
-export { renderTaskModal }
+export { renderTaskEdit }

@@ -4,6 +4,7 @@ import { renderProject } from './project';
 import './style.css';
 import { renderProjectModal } from './project-modal';
 import { renderTaskModal } from './task-modal';
+import { renderTaskEdit } from './task-edit-modal';
 
 const body = document.querySelector('body');
 
@@ -55,7 +56,6 @@ function home(curProject) {
   body.innerHTML = '';
   renderHeader();
   renderAside();
-  console.log(curProject);
   renderProject(curProject);
 }
 
@@ -64,9 +64,16 @@ document.addEventListener('click', (e) => {
   const index = e.target.dataset.index;
   const modal = document.querySelector('.modal');
 
-  if(classes.value.includes('trash')){
+  if(classes.value.includes('task-delete')){
     projectList[curProject].tasks.splice(index,1);
     localStorage.setItem('projectList', JSON.stringify(projectList));
+    home(curProject);
+  }
+
+  if(classes.value.includes('project-delete')){
+    projectList.splice(curProject, 1);
+    localStorage.setItem('projectList', JSON.stringify(projectList));
+    curProject = 0;
     home(curProject);
   }
 
@@ -110,6 +117,30 @@ document.addEventListener('click', (e) => {
     }
     home(curProject);
     
+  }
+
+  if(classes.value.includes('task-name')){
+    const index = e.target.dataset.index;
+    const curName = projectList[curProject].tasks[index].name;
+    const curDueDate = projectList[curProject].tasks[index].dueDate;
+    const curDesc = projectList[curProject].tasks[index].desc;
+    const curPriority = projectList[curProject].tasks[index].priority;
+    renderTaskEdit(curName,curDueDate,curDesc,curPriority,index)
+  }
+
+  if(classes.value.includes('task-edit-submit')){
+    e.preventDefault();
+    const tname = document.querySelector('#name').value;
+    const tdesc = document.querySelector('#desc').value;
+    const tdueDate = document.querySelector('#dueDate').value;
+    const tpriority = document.querySelector('#priority').value;
+    const index = document.querySelector('#name').dataset.index;
+    projectList[curProject].tasks[index].name = tname;
+    projectList[curProject].tasks[index].desc = tdesc;
+    projectList[curProject].tasks[index].dueDate = tdueDate;
+    projectList[curProject].tasks[index].priority = tpriority;
+    localStorage.setItem('projectList', JSON.stringify(projectList));
+    home(curProject);
   }
 
   if(classes.value.includes('quick-add')){
