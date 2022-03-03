@@ -22,6 +22,7 @@ function renderProjectModal() {
   nameInput.setAttribute('type', 'text');
   nameInput.setAttribute('id', 'name');
   nameInput.setAttribute('name', 'name');
+  nameInput.setAttribute('required','required');
   name.appendChild(nameInput);
 
   desc.setAttribute('for', 'desc');

@@ -55,16 +55,17 @@ function renderProject(curProject) {
     list.appendChild(element);
   });
 
-  addTask.innerHTML = `Add Task <i class="fa-solid fa-plus"></i>`
-  addTask.classList.add('item','add-task');
+  addTask.innerHTML = `Add Task <i class="fa-solid fa-plus add-task-trigger"></i>`
+  addTask.classList.add('item','add-task','add-task-trigger');
   list.appendChild(addTask);
 
-  deleteProject.innerHTML = 'Delete Project <i class="fa-solid fa-trash-can"></i>';
-  deleteProject.classList.add('project-delete');
+  deleteProject.innerHTML = 'Delete Project <i class="fa-solid fa-trash-can project-delete-trigger"></i>';
+  deleteProject.classList.add('item','project-delete','project-delete-trigger');
+
+  if(current.name !== 'Inbox') list.appendChild(deleteProject);
 
   main.appendChild(heading);
   main.appendChild(list);
-  if(current.name !== 'Inbox') main.appendChild(deleteProject);
   body.appendChild(main);
 }
 

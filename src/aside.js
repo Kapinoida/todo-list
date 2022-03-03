@@ -17,8 +17,8 @@ function renderAside() {
   })
 
   list.appendChild(ul);
-  addProject.innerHTML = `Add Project <i class="fa-solid fa-plus"></i>`;
-  addProject.classList.add('add-project');
+  addProject.innerHTML = `Add Project <i class="fa-solid fa-plus add-project-trigger"></i>`;
+  addProject.classList.add('add-project','add-project-trigger');
 
   aside.appendChild(inbox);
   aside.appendChild(addProject);

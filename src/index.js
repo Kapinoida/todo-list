@@ -70,7 +70,7 @@ document.addEventListener('click', (e) => {
     home(curProject);
   }
 
-  if(classes.value.includes('project-delete')){
+  if(classes.value.includes('project-delete-trigger')){
     projectList.splice(curProject, 1);
     localStorage.setItem('projectList', JSON.stringify(projectList));
     curProject = 0;
@@ -83,11 +83,11 @@ document.addEventListener('click', (e) => {
     home(curProject);
   }
 
-  if(classes.value.includes('add-project')){
+  if(classes.value.includes('add-project-trigger')){
     renderProjectModal();
   }
 
-  if(classes.value.includes('add-task')){
+  if(classes.value.includes('add-task-trigger')){
     renderTaskModal();
   }
 
@@ -95,6 +95,10 @@ document.addEventListener('click', (e) => {
     e.preventDefault();
     const pname = document.querySelector('#name').value;
     const pdesc = document.querySelector('#desc').value;
+    if(pname=='') {
+      alert('Name required')
+      return;
+    }
     const newProject = new Project(pname, pdesc);
     projectList.push(newProject);
     localStorage.setItem('projectList', JSON.stringify(projectList));
@@ -108,6 +112,10 @@ document.addEventListener('click', (e) => {
     const tdesc = document.querySelector('#desc').value;
     const tdueDate = document.querySelector('#dueDate').value;
     const tpriority = document.querySelector('#priority').value;
+    if(tname=='') {
+      alert('Name required')
+      return;
+    }
     const newTask = new Task(tname, tdesc, tdueDate, tpriority);
     projectList[curProject].tasks.push(newTask);
     localStorage.setItem('projectList', JSON.stringify(projectList));
@@ -135,6 +143,10 @@ document.addEventListener('click', (e) => {
     const tdueDate = document.querySelector('#dueDate').value;
     const tpriority = document.querySelector('#priority').value;
     const index = document.querySelector('#name').dataset.index;
+    if(tname=='') {
+      alert('Name required')
+      return;
+    }
     projectList[curProject].tasks[index].name = tname;
     projectList[curProject].tasks[index].desc = tdesc;
     projectList[curProject].tasks[index].dueDate = tdueDate;
