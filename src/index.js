@@ -7,7 +7,7 @@ import { renderTaskModal } from './task-modal';
 
 const body = document.querySelector('body');
 
-let projectList = [];
+let projectList = JSON.parse(localStorage.getItem('projectList')) || [];
 
 class Project {
   constructor(name,desc) {
@@ -29,7 +29,7 @@ class Task {
 }
 
 let inbox;
-let curProject;
+let curProject = 0;
 let tempProject;
 
 function initialize() {
@@ -37,7 +37,6 @@ function initialize() {
     inbox = new Project('Inbox', 'Default');
     projectList.push(inbox);
     curProject = 0;
-
 
     const task = new Task('stuff', '', '', 'Low');
     task.complete = true;
@@ -48,7 +47,7 @@ function initialize() {
 
     const task3 = new Task('that', '', '', 'Low');
     inbox.tasks.push(task3);
-
+    localStorage.setItem('projectList', JSON.stringify(projectList));
   };
 }
 
@@ -56,6 +55,7 @@ function home(curProject) {
   body.innerHTML = '';
   renderHeader();
   renderAside();
+  console.log(curProject);
   renderProject(curProject);
 }
 
@@ -66,11 +66,13 @@ document.addEventListener('click', (e) => {
 
   if(classes.value.includes('trash')){
     projectList[curProject].tasks.splice(index,1);
+    localStorage.setItem('projectList', JSON.stringify(projectList));
     home(curProject);
   }
 
   if(classes.value.includes('check')){
     e.target.checked ? projectList[curProject].tasks[index].complete = true : projectList[curProject].tasks[index].complete = false;
+    localStorage.setItem('projectList', JSON.stringify(projectList));
     home(curProject);
   }
 
@@ -88,6 +90,7 @@ document.addEventListener('click', (e) => {
     const pdesc = document.querySelector('#desc').value;
     const newProject = new Project(pname, pdesc);
     projectList.push(newProject);
+    localStorage.setItem('projectList', JSON.stringify(projectList));
     curProject = projectList.length - 1;
     home(curProject);
   }
@@ -100,9 +103,10 @@ document.addEventListener('click', (e) => {
     const tpriority = document.querySelector('#priority').value;
     const newTask = new Task(tname, tdesc, tdueDate, tpriority);
     projectList[curProject].tasks.push(newTask);
-    if(tempProject != curProject && tempProject!= '') {
+    localStorage.setItem('projectList', JSON.stringify(projectList));
+    if(tempProject != curProject && !isNaN(tempProject)) {
       curProject = tempProject;
-      tempProject = '';
+      tempProject = NaNfiueoij        ;
     }
     home(curProject);
     
@@ -125,7 +129,7 @@ document.addEventListener('click', (e) => {
 
 })
 
-initialize();
+// initialize();
 home(curProject);
 
 export { body, projectList };
