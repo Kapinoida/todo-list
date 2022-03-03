@@ -38,17 +38,6 @@ function initialize() {
     inbox = new Project('Inbox', 'Default');
     projectList.push(inbox);
     curProject = 0;
-
-    const task = new Task('stuff', '', '', 'Low');
-    task.complete = true;
-    inbox.tasks.push(task);
-
-    const task2 = new Task('things', '', '', 'Low');
-    inbox.tasks.push(task2);
-
-    const task3 = new Task('that', '', '', 'Low');
-    inbox.tasks.push(task3);
-    localStorage.setItem('projectList', JSON.stringify(projectList));
   };
 }
 
@@ -172,7 +161,7 @@ document.addEventListener('click', (e) => {
 
 })
 
-// initialize();
+initialize();
 home(curProject);
 
 export { body, projectList };
